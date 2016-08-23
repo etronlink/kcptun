@@ -71,6 +71,7 @@ func handleMux(conn io.ReadWriteCloser, target string, config *yamux.Config) {
 		p2, err := net.DialTimeout("tcp", target, 5*time.Second)
 		if err != nil {
 			log.Println(err)
+			p1.Close()
 			return
 		}
 		go handleClient(p1, p2)
